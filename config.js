@@ -1,0 +1,1 @@
+window.JARDIN_API = 'https://jardin-pixel.vercel.app/api/jardin';
