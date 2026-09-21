@@ -132,7 +132,8 @@ function mostrar() {
   const lista = completa(p);
   $('seleccionada').textContent = `MACETA 0${seleccion + 1}`;
   $('estado').textContent = !p ? 'Nueva semilla' : lista ? 'Un poquito de sol' : p.agua <= 0 ? 'Un sorbito de agua' : 'Está creciendo';
-  $('descripcion').textContent = !p ? 'Planta un girasol y dale su primer riego.' : lista ? 'Tu girasol está listo para entrar a la colección.' : 'Cada pequeño cuidado lo acerca a florecer.';
+  $('descripcion').textContent = !p ? 'Planta un girasol y dale su primer riego.' : lista ? 'Tu girasol está listo para entrar a la colección.' : '';
+  $('descripcion').hidden = ! $('descripcion').textContent;
   cambiarImagen($('imagen'), etapa(p), !p ? 'Maceta vacía' : lista ? 'Girasol florecido' : 'Girasol en crecimiento');
   const porcentaje = p ? Math.floor(p.crecimiento / CONFIG.duracion * 100) : 0;
   $('progreso').value = porcentaje;
