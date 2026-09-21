@@ -2,30 +2,30 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#314f3e"><meta name="description" content="Un pequeño jardín de girasoles. Planta, cuida y colecciona a tu ritmo.">
+<meta name="theme-color" content="#314f3e"><meta name="description" content="Hice este pequeño jardín para ti. Un lugar para cuidar tus flores y verlas crecer.">
 <title>Un poquito de sol · Mi jardín</title><link rel="icon" href="assets/girasol-flor.png"><link rel="stylesheet" href="style.css"><script src="config.js" defer></script><script src="game.js" defer></script>
 </head>
 <body>
 <div class="app">
 <header><a class="brand" href="#"><span class="brand-icon" aria-hidden="true">✳</span></a><div class="wallet"><span class="coin" aria-hidden="true">●</span><strong id="monedas">50</strong><span>monedas</span></div></header>
 <main>
-<section class="intro"><div><p class="eyebrow">PEQUEÑA COLECCIÓN</p><h1>FLORES<br>AMARILLAS<span>.</span></h1><p>Si me das un tiempo, podré añadir más flores c:</p></div><div class="stamp"><img src="assets/girasol-flor.png" alt="Girasol dibujado a mano"><span>CULTIVA A TU RITMO</span></div></section>
+<section class="intro"><div><p class="eyebrow">UN PEQUEÑO JARDÍN PARA TI</p><h1>FLORES<br>AMARILLAS<span>.</span></h1><p>Hice este pequeño jardín para ti. Espero que te guste cuidar estas flores tanto como a mí me gustó dibujarlas.</p><p>Si me das un tiempo, podré añadir más flores c:</p></div><div class="stamp"><img src="assets/girasol-flor.png" alt="Girasol dibujado a mano"><span>DIBUJADAS CON CARIÑO</span></div></section>
 <section class="account" aria-label="Tu cuenta">
 <div id="sesion-activa" hidden><span id="nombre-usuario"></span><button id="salir" class="text-button">Cerrar sesión</button></div>
 <form id="cuenta-form">
-<h2 id="cuenta-titulo">Entra a tu jardín</h2><p>Tu colección te espera en cualquier dispositivo.</p>
+<h2 id="cuenta-titulo">Qué bueno verte por aquí</h2><p id="cuenta-bienvenida">Aquí te esperan tus flores. Entra para seguir cuidándolas.</p>
 <label for="usuario">Usuario</label><input id="usuario" name="username" autocomplete="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" required placeholder="Tu usuario">
 <label for="password">Contraseña</label><input id="password" name="password" type="password" autocomplete="current-password" minlength="10" maxlength="128" required>
 <div class="account-actions"><button id="entrar" type="submit" class="primary">Entrar</button><button id="modo-cuenta" type="button" class="text-button">Crear una cuenta</button></div>
-<p id="cuenta-nota" class="small">Usa la misma cuenta en el computador y en el celular.</p>
+<p id="cuenta-nota" class="small">Puedes volver desde el celular o el computador con tu misma cuenta.</p>
 <p id="cuenta-error" role="status"></p>
 </form></section>
 <div id="zona-juego" hidden><nav aria-label="Secciones"><button class="nav active" data-tab="jardin" aria-pressed="true">Jardín</button><button class="nav" data-tab="coleccion" aria-pressed="false">Colección <span id="total-tab">0</span></button></nav>
 <p id="mensaje" class="notice" role="status">Elige una maceta para empezar.</p>
-<section id="jardin" class="tab"><div class="layout"><section class="garden"><div class="section-heading"><div><p class="eyebrow">INVERNADERO</p><h2>Jardín</h2></div><span id="ocupadas" class="tag">0 / 6 plantadas</span></div><div id="macetas" class="pots" aria-label="Tus seis macetas"></div><div class="garden-foot"><span>El agua siempre es gratis.</span><button id="regar-todas" class="text-button">Regar todas ↗</button></div></section>
+<section id="jardin" class="tab"><div class="layout"><section class="garden"><div class="section-heading"><div><p class="eyebrow">TUS MACETAS</p><h2>Jardín</h2></div><span id="ocupadas" class="tag">0 / 6 plantadas</span></div><div id="macetas" class="pots" aria-label="Tus seis macetas"></div><div class="garden-foot"><span>El agua siempre es gratis.</span><button id="regar-todas" class="text-button">Regar todas ↗</button></div></section>
 <aside class="care"><p class="eyebrow" id="seleccionada">MACETA 01</p><h2 id="estado">Nueva semilla</h2><p id="descripcion">Planta un girasol y dale su primer riego.</p><div class="detail-image"><img id="imagen" src="assets/maceta-vacia.png" alt="Maceta vacía"></div><div class="meter-label"><label for="progreso">Crecimiento</label><strong id="porcentaje">0 %</strong></div><progress id="progreso" value="0" max="100"></progress><p id="agua" class="water">Sin plantar</p><div class="actions"><button id="plantar" class="primary">Plantar girasol <span>10 ●</span></button><button id="regar" class="primary" hidden>Regar <span>Gratis</span></button><button id="fertilizar" class="secondary" hidden>Fertilizar · +15 s <span>3 ●</span></button><button id="coleccionar" class="primary" hidden>Coleccionar <span>+15 ●</span></button><button id="rescatar" class="secondary" hidden>Recibir una semilla de rescate</button></div><p id="nota" class="small">Cada girasol completado te entrega 15 monedas.</p></aside></div></section>
 <section id="coleccion" class="tab" hidden><div class="section-heading"><div><h2>Tu colección</h2></div><span class="tag">1 especie disponible</span></div><article class="collection-card"><div class="collection-art"><img src="assets/girasol-flor.png" alt="Girasol" id="flor-album"></div><div><p class="eyebrow" id="descubierto">POR DESCUBRIR · 001</p><h3>Girasol</h3><p>Primera flor que agregué y creció gracias a ti.</p><strong class="collection-count"><span id="cantidad">0</span> coleccionados</strong></div></article></section>
-<div class="guide"><article><span>01</span><h3>Planta</h3><p>Elige una maceta vacía. Una semilla de girasol cuesta 10 monedas.</p></article><article><span>02</span><h3>Riega</h3><p>Es gratis. Sin agua, la planta se pausa (No muere).</p></article><article><span>03</span><h3>Espera un poquito</h3><p>El girasol necesita 60 segundos de crecimiento. Por 3 monedas, el fertilizante añade 25% de progreso. Es opcional.</p></article><article><span>04</span><h3>Colecciona</h3><p>Al florecer, pulsa Coleccionar: recibes 15 monedas, guardas la flor y liberas la maceta.</p></article></div></div>
-</main><footer><span id="guardado">Inicia sesión para abrir tu jardín</span></footer>
+</div>
+</main><footer><span id="guardado">Tus flores te esperan por aquí.</span></footer>
 </div>
 </body></html>

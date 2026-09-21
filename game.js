@@ -23,7 +23,7 @@ function recibir(datos) {
   $('zona-juego').hidden = false;
   $('sesion-activa').hidden = false;
   $('nombre-usuario').textContent = `Jardín de ${datos.usuario}`;
-  $('guardado').textContent = 'Conectado · Partida guardada en tu cuenta';
+  $('guardado').textContent = 'Tus flores y tus avances están guardados.';
   actualizarVista();
 }
 function actualizarVista() {
@@ -40,7 +40,7 @@ function actualizarVista() {
 function cerrarLocal(texto = '') {
   guardarToken(''); base = null; estado = null; conectado = false;
   $('zona-juego').hidden = true; $('sesion-activa').hidden = true; $('cuenta-form').hidden = false;
-  $('cuenta-error').textContent = texto; $('guardado').textContent = 'Inicia sesión para abrir tu jardín';
+  $('cuenta-error').textContent = texto; $('guardado').textContent = 'Tus flores te esperan por aquí.';
   $('monedas').textContent = '—';
 }
 async function peticion(datos) {
@@ -154,11 +154,12 @@ document.querySelectorAll('[data-tab]').forEach(boton => boton.addEventListener(
 }));
 $('modo-cuenta').addEventListener('click', () => {
   registro = !registro;
-  $('cuenta-titulo').textContent = registro ? 'Crea tu jardín' : 'Entra a tu jardín';
+  $('cuenta-titulo').textContent = registro ? 'Te guardé un lugar' : 'Qué bueno verte por aquí';
+  $('cuenta-bienvenida').textContent = registro ? 'Este rinconcito también puede ser tuyo. Crea tu cuenta para empezar a cuidar tus flores c:' : 'Aquí te esperan tus flores. Entra para seguir cuidándolas.';
   $('entrar').textContent = registro ? 'Crear cuenta' : 'Entrar';
   $('modo-cuenta').textContent = registro ? 'Ya tengo cuenta' : 'Crear una cuenta';
   $('password').autocomplete = registro ? 'new-password' : 'current-password';
-  $('cuenta-nota').textContent = registro ? 'Usuario: 3–24 letras, números o _. Guarda tu contraseña (mínimo 10 caracteres); aún no hay recuperación automática.' : 'Usa la misma cuenta en el computador y en el celular.';
+  $('cuenta-nota').textContent = registro ? 'Elige un usuario de 3–24 letras, números o _. Guarda tu contraseña de al menos 10 caracteres: todavía no puedo ayudarte a recuperarla.' : 'Puedes volver desde el celular o el computador con tu misma cuenta.';
   $('cuenta-error').textContent = '';
 });
 $('cuenta-form').addEventListener('submit', async evento => {
