@@ -7,11 +7,17 @@ let ocupado = false, conectado = false, registro = false, token = '';
 const imagenes = {vacia:'maceta-vacia.png',brote:'girasol-brote.png',planta:'girasol-planta.png',flor:'girasol-flor.png'};
 const completa = p => p && p.crecimiento >= CONFIG.duracion;
 const API = String(window.JARDIN_API || '').trim();
-try { token = sessionStorage.getItem('jardin-sesion') || ''; } catch { /* Se puede iniciar sesión sin persistir el token. */ }
+// Solo se recuerda la sesión aquí; la partida permanece en MongoDB.
+try { token = localStorage.getItem('jardin-sesion') || ''; } catch {}
+if (!token) {
+  try { token = sessionStorage.getItem('jardin-sesion') || ''; } catch {}
+}
 function guardarToken(nuevo) {
   token = nuevo;
+  try { if (nuevo) localStorage.setItem('jardin-sesion', nuevo); else localStorage.removeItem('jardin-sesion'); } catch {}
   try { if (nuevo) sessionStorage.setItem('jardin-sesion', nuevo); else sessionStorage.removeItem('jardin-sesion'); } catch {}
 }
+if (token) guardarToken(token);
 function mensaje(texto) { $('mensaje').textContent = texto; }
 function recibir(datos) {
   base = datos.partida;
@@ -154,12 +160,12 @@ document.querySelectorAll('[data-tab]').forEach(boton => boton.addEventListener(
 }));
 $('modo-cuenta').addEventListener('click', () => {
   registro = !registro;
-  $('cuenta-titulo').textContent = registro ? 'Te guardé un lugar' : 'Qué bueno verte por aquí';
-  $('cuenta-bienvenida').textContent = registro ? 'Este rinconcito también puede ser tuyo. Crea tu cuenta para empezar a cuidar tus flores c:' : 'Aquí te esperan tus flores. Entra para seguir cuidándolas.';
+  $('cuenta-titulo').textContent = registro ? 'Necesito que te crees un usuario una única vez, perdón jajsjjs' : 'Qué bueno verte por aquí';
+  $('cuenta-bienvenida').textContent = registro ? 'Crea tu cuenta para empezar a cuidar tus flores c:' : 'Aquí te esperan tus flores. Si usas el mismo navegador no tendrás que iniciar sesión ;)';
   $('entrar').textContent = registro ? 'Crear cuenta' : 'Entrar';
   $('modo-cuenta').textContent = registro ? 'Ya tengo cuenta' : 'Crear una cuenta';
   $('password').autocomplete = registro ? 'new-password' : 'current-password';
-  $('cuenta-nota').textContent = registro ? 'Elige un usuario de 3–24 letras, números o _. Guarda tu contraseña de al menos 10 caracteres: todavía no puedo ayudarte a recuperarla.' : 'Puedes volver desde el celular o el computador con tu misma cuenta.';
+  $('cuenta-nota').textContent = registro ? 'Elige un usuario de 3–24 letras, números o _. Guarda tu contraseña de al menos 10 caracteres: todavía no puedo ayudarte a recuperarla. Si pierdes la contraseña, contacta con el administrador (yo)' : 'Puedes volver desde el celular o el computador con tu misma cuenta.';
   $('cuenta-error').textContent = '';
 });
 $('cuenta-form').addEventListener('submit', async evento => {
